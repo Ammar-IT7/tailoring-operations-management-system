@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة عمليات الخياطة - نموذج أولي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+        :root {
+            --primary-color: #3f51b5;
+            --secondary-color: #f50057;
+            --accent-color: #00b0ff;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --light-gray: #f5f5f5;
+            --dark-gray: #616161;
+            --white: #ffffff;
+            --black: #212121;
+            /* Typography */
+            --big-font: clamp(2.5rem, 5vw, 3.5rem);
+            --h2-font: 2.6rem;
+            --normal-font: 2rem;
+            --font-primary: 'Cairo', sans-serif;
+            --font-secondary: 'Almarai', sans-serif;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+        }
+        
+        
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .prototype-container {
+            max-width: 414px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background-color: var(--white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .back-button, .menu-button {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .content {
+            padding: 16px;
+            padding-bottom: 70px;
+        }
+        
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--white);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 414px;
+            padding: 8px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 12px;
+            padding: 6px 0;
+            width: 20%;
+            text-align: center;
+            transition: color 0.3s;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+        
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+        
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--white);
+            z-index: 200;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+        
+        .drawer.active {
+            right: 0;
+        }
+        
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 199;
+            display: none;
+        }
+        
+        .drawer-overlay.active {
+            display: block;
+        }
+        
+        .drawer-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .drawer-content {
+            padding: 8px 0;
+        }
+        
+        .drawer-section {
+            padding: 8px 16px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .drawer-section-title {
+            font-size: 12px;
+            color: var(--dark-gray);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .drawer-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: var(--black);
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        
+        .drawer-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .drawer-item i {
+            margin-left: 16px;
+            color: var(--dark-gray);
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 12px 16px;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h2 {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .card-content {
+            padding: 16px;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .stat-box {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .stat-box h3 {
+            font-size: 12px;
+            color: var(--dark-gray);
+            margin-bottom: 8px;
+        }
+        
+        .stat-box p {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .alert {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+        
+        .alert.warning {
+            background-color: #fff8e1;
+            border: 1px solid #ffecb3;
+            color: var(--warning-color);
+        }
+        
+        .alert i {
+            margin-left: 12px;
+            font-size: 18px;
+        }
+        
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-primary {
+            font-weight: 500;
+        }
+        
+        .item-secondary {
+            font-size: 12px;
+            color: var(--dark-gray);
+        }
+        
+        .item-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: #fff8e1;
+            color: var(--warning-color);
+        }
+        
+        .status-progress {
+            background-color: #e3f2fd;
+            color: var(--accent-color);
+        }
+        
+        .status-completed {
+            background-color: #e8f5e9;
+            color: var(--success-color);
+        }
+        
+        .fab {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            cursor: pointer;
+            font-size: 24px;
+            transition: transform 0.2s;
+        }
+        
+        .fab:hover {
+            transform: scale(1.05);
+        }
+        
+        .tab-container {
+            margin-bottom: 16px;
+        }
+        
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background-color: var(--white);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .tab {
+            padding: 12px 16px;
+            white-space: nowrap;
+            color: var(--dark-gray);
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            background-color: var(--white);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: var(--white);
+        }
+        
+        .form-button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+        }
+        
+        .form-button.secondary {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+        }
+        
+        .stepper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        
+        .stepper::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background-color: #ddd;
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .step.active .step-circle {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .step.completed .step-circle {
+            background-color: var(--success-color);
+            color: var(--white);
+        }
+        
+        .step-label {
+            font-size: 10px;
+            color: var(--dark-gray);
+            text-align: center;
+            max-width: 80px;
+        }
+        
+        .step.active .step-label {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 8px 0;
+        }
+        
+        .chart-bar {
+            background-color: var(--primary-color);
+            width: 24px;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+        
+        .chart-label {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .chart-value {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .screen {
+            display: none;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        @media (max-width: 414px) {
+            .prototype-container {
+                width: 100%;
+                box-shadow: none;
+            }
+            
+            .bottom-nav {
+                width: 100%;
+            }
+        }
+        
+        /* Icons */
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: rtl;
+            -webkit-font-feature-settings: 'liga';
+            font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="prototype-container">
+        <div class="header">
+            <button class="back-button" onclick="goBack()">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+            <h1 id="screen-title">لوحة المعلومات</h1>
+            <button class="menu-button" onclick="toggleDrawer()">
+                <i class="material-icons">menu</i>
+            </button>
+        </div>
+        
+        <div class="drawer" id="drawer">
+            <div class="drawer-header">
+                <div class="user-avatar">
+                    <i class="material-icons">person</i>
+                </div>
+                <h2>أحمد محمد</h2>
+                <p>مدير النظام</p>
+            </div>
+            <div class="drawer-content">
+                <div class="drawer-section">
+                    <h3 class="drawer-section-title">العمليات اليومية</h3>
+                    <a href="#" class="drawer-item" onclick="navigateTo('dashboard')">
+                        <i class="material-icons">dashboard</i>
+                        <span>لوحة المعلومات</span>
+                    </a>
+                    <a href="#" class="drawer-item" onclick="navigateTo('operations')">
+                        <i class="material-icons">assignment</i>
+                        <span>العمليات</span>
+                    </a>
+                    <a href="#" class="drawer-item" onclick="navigateTo('inventory')">
+                        <i class="material-icons">inventory</i>
+                        <span>المخزون</span>
+                    </a>
+                </div>
+                <div class="drawer-section">
+                    <h3 class="drawer-section-title">الإدارة والتهيئة</h3>
+                    <a href="#" class="drawer-item" onclick="navigateTo('setup')">
+                        <i class="material-icons">settings</i>
+                        <span>إعدادات النظام</span>
+                    </a>
+                    <a href="#" class="drawer-item" onclick="navigateTo('employees')">
+                        <i class="material-icons">people</i>
+                        <span>الموظفين</span>
+                    </a>
+                    <a href="#" class="drawer-item" onclick="navigateTo('customers')">
+                        <i class="material-icons">person</i>
+                        <span>العملاء</span>
+                    </a>
+                    <a href="#" class="drawer-item" onclick="navigateTo('suppliers')">
+                        <i class="material-icons">local_shipping</i>
+                        <span>الموردين</span>
+                    </a>
+                </div>
+                <div class="drawer-section">
+                    <h3 class="drawer-section-title">التقارير</h3>
+                    <a href="#" class="drawer-item" onclick="navigateTo('reports')">
+                        <i class="material-icons">bar_chart</i>
+                        <span>التقارير المالية</span>
+                    </a>
+                    <a href="#" class="drawer-item" onclick="navigateTo('inventory-reports')">
+                        <i class="material-icons">assessment</i>
+                        <span>تقارير المخزون</span>
+                    </a>
+                </div>
+                <div class="drawer-section">
+                    <a href="#" class="drawer-item">
+                        <i class="material-icons">help</i>
+                        <span>المساعدة</span>
+                    </a>
+                    <a href="#" class="drawer-item">
+                        <i class="material-icons">logout</i>
+                        <span>تسجيل الخروج</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
+        
+        <!-- Dashboard Screen -->
+        <div class="screen active" id="dashboard">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>ملخص الإحصائيات اليومية</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="stat-grid">
+                            <div class="stat-box">
+                                <h3>الطلبات الجديدة</h3>
+                                <p>12</p>
+                            </div>
+                            <div class="stat-box">
+                                <h3>قيد التنفيذ</h3>
+                                <p>28</p>
+                            </div>
+                            <div class="stat-box">
+                                <h3>المنتهية</h3>
+                                <p>7</p>
+                            </div>
+                            <div class="stat-box">
+                                <h3>المبيعات اليومية</h3>
+                                <p>4,250 ر.س</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2>التنبيهات العاجلة</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="alert warning">
+                            <i class="material-icons">warning</i>
+                            <div>
+                                <strong>5 طلبات</strong> مستحقة التسليم اليوم
+                            </div>
+                        </div>
+                        <div class="alert warning">
+                            <i class="material-icons">inventory</i>
+                            <div>
+                                <strong>3 أصناف</strong> وصلت للحد الأدنى في المخزون
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2>الطلبات الأخيرة</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">#10045 - محمد أحمد</div>
+                                <div class="item-secondary">ثوب رجالي - 12 مارس</div>
+                            </div>
+                            <span class="item-status status-pending">قيد الانتظار</span>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">#10044 - سارة علي</div>
+                                <div class="item-secondary">فستان سهرة - 11 مارس</div>
+                            </div>
+                            <span class="item-status status-progress">قيد التنفيذ</span>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">#10043 - خالد عمر</div>
+                                <div class="item-secondary">بدلة رسمية - 10 مارس</div>
+                            </div>
+                            <span class="item-status status-progress">قيد التنفيذ</span>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">#10042 - نورة سعيد</div>
+                                <div class="item-secondary">تعديل قميص - 9 مارس</div>
+                            </div>
+                            <span class="item-status status-completed">تم التسليم</span>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">#10041 - فهد سلطان</div>
+                                <div class="item-secondary">جلابية - 9 مارس</div>
+                            </div>
+                            <span class="item-status status-completed">تم التسليم</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2>مخطط الإنتاج اليومي</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <div class="chart-bar" style="height: 60%;">
+                                <span class="chart-value">6</span>
+                                <span class="chart-label">السبت</span>
+                            </div>
+                            <div class="chart-bar" style="height: 80%;">
+                                <span class="chart-value">8</span>
+                                <span class="chart-label">الأحد</span>
+                            </div>
+                            <div class="chart-bar" style="height: 70%;">
+                                <span class="chart-value">7</span>
+                                <span class="chart-label">الإثنين</span>
+                            </div>
+                            <div class="chart-bar" style="height: 90%;">
+                                <span class="chart-value">9</span>
+                                <span class="chart-label">الثلاثاء</span>
+                            </div>
+                            <div class="chart-bar" style="height: 100%;">
+                                <span class="chart-value">10</span>
+                                <span class="chart-label">الأربعاء</span>
+                            </div>
+                            <div class="chart-bar" style="height: 80%;">
+                                <span class="chart-value">8</span>
+                                <span class="chart-label">الخميس</span>
+                            </div>
+                            <div class="chart-bar" style="height: 50%;">
+                                <span class="chart-value">5</span>
+                                <span class="chart-label">الجمعة</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fab" onclick="navigateTo('new-invoice')">
+                <i class="material-icons">add</i>
+            </div>
+        </div>
+        
+        <!-- Operations Screen -->
+        <div class="screen" id="operations">
+            <div class="content">
+                <div class="tab-container">
+                    <div class="tabs">
+                        <div class="tab active" onclick="switchTab('invoice', this)">فاتورة الحجز</div>
+                        <div class="tab" onclick="switchTab('receipt', this)">سند القبض</div>
+                        <div class="tab" onclick="switchTab('payment', this)">سند الصرف</div>
+                        <div class="tab" onclick="switchTab('supply', this)">أمر التوريد</div>
+                        <div class="tab" onclick="switchTab('preparation', this)">التجهيز</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content active" id="invoice">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>الفواتير الأخيرة</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">#10045 - محمد أحمد</div>
+                                    <div class="item-secondary">12 مارس - 850 ر.س</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">#10044 - سارة علي</div>
+                                    <div class="item-secondary">11 مارس - 1200 ر.س</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">#10043 - خالد عمر</div>
+                                    <div class="item-secondary">10 مارس - 950 ر.س</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="receipt" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>سندات القبض الأخيرة</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">سند #245 - محمد أحمد</div>
+                                    <div class="item-secondary">12 مارس - 400 ر.س</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">سند #244 - سارة علي</div>
+                                    <div class="item-secondary">11 مارس - 600 ر.س</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="payment" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>سندات الصرف الأخيرة</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">سند #112 - مؤسسة الأقمشة</div>
+                                    <div class="item-secondary">10 مارس - 2000 ر.س</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">سند #111 - المدينة للخيوط</div>
+                                    <div class="item-secondary">9 مارس - 1500 ر.س</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="supply" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>أوامر التوريد الأخيرة</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">طلب #78 - قماش قطني</div>
+                                    <div class="item-secondary">8 مارس - 15 متر</div>
+                                </div>
+                                <span class="item-status status-completed">تم التوريد</span>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">طلب #77 - خيوط متنوعة</div>
+                                    <div class="item-secondary">7 مارس - 30 قطعة</div>
+                                </div>
+                                <span class="item-status status-pending">قيد الانتظار</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="preparation" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>طلبات التجهيز الحالية</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">#10044 - سارة علي</div>
+                                    <div class="item-secondary">فستان سهرة - 50% مكتمل</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">#10043 - خالد عمر</div>
+                                    <div class="item-secondary">بدلة رسمية - 75% مكتمل</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fab" onclick="navigateTo('new-invoice')">
+                <i class="material-icons">add</i>
+            </div>
+        </div>
+        
+        <!-- Inventory Screen -->
+        <div class="screen" id="inventory">
+            <div class="content">
+                <div class="tab-container">
+                    <div class="tabs">
+                        <div class="tab active" onclick="switchTab('fabrics', this)">أقمشة</div>
+                        <div class="tab" onclick="switchTab('threads', this)">خيوط</div>
+                        <div class="tab" onclick="switchTab('accessories', this)">إكسسوارات</div>
+                        <div class="tab" onclick="switchTab('supplies', this)">مستلزمات</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content active" id="fabrics">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>الأقمشة المتوفرة</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">قماش قطن مصري</div>
+                                    <div class="item-secondary">45 متر - 80 ر.س/متر</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">قماش كتان فاخر</div>
+                                    <div class="item-secondary">32 متر - 120 ر.س/متر</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">قماش حرير طبيعي</div>
+                                    <div class="item-secondary">18 متر - 200 ر.س/متر</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">قماش صوف انجليزي</div>
+                                    <div class="item-secondary">24 متر - 150 ر.س/متر</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="threads" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>الخيوط المتوفرة</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">خيط قطن أبيض</div>
+                                    <div class="item-secondary">45 قطعة - 15 ر.س/قطعة</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">خيط حرير أسود</div>
+                                    <div class="item-secondary">32 قطعة - 25 ر.س/قطعة</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="accessories" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>الإكسسوارات المتوفرة</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">أزرار معدنية ذهبية</div>
+                                    <div class="item-secondary">120 قطعة - 5 ر.س/قطعة</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">سحابات 30 سم</div>
+                                    <div class="item-secondary">90 قطعة - 8 ر.س/قطعة</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="supplies" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>المستلزمات المتوفرة</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">إبر ماكينة خياطة</div>
+                                    <div class="item-secondary">50 علبة - 20 ر.س/علبة</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">مقصات خياطة</div>
+                                    <div class="item-secondary">10 قطعة - 60 ر.س/قطعة</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fab" onclick="navigateTo('new-item')">
+                <i class="material-icons">add</i>
+            </div>
+        </div>
+        
+        <!-- Setup Screen -->
+        <div class="screen" id="setup">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>إعدادات النظام</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="list-item">
+                            <div class="item-primary">بيانات المنشأة</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">بيانات الفروع</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">بيانات المستخدمين</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">مجموعات المستخدمين</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">العملات</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">النسخ الاحتياطي</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">الصناديق والبنوك</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">أنواع الخياطة</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">ترميز المقاسات</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">وحدات القياس</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reports Screen -->
+        <div class="screen" id="reports">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>التقارير المتاحة</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="list-item">
+                            <div class="item-primary">تقارير المبيعات</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">تقارير المخزون</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">تقارير العملاء</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">تقارير الموظفين</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">التقارير المالية</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Customer Data Screen -->
+        <div class="screen" id="customers">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>بيانات العملاء</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">محمد أحمد الزهراني</div>
+                                <div class="item-secondary">جوال: 0501234567</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">سارة علي المطيري</div>
+                                <div class="item-secondary">جوال: 0559876543</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">خالد عمر العتيبي</div>
+                                <div class="item-secondary">جوال: 0551122334</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">نورة سعيد القحطاني</div>
+                                <div class="item-secondary">جوال: 0505544332</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fab" onclick="navigateTo('new-customer')">
+                <i class="material-icons">add</i>
+            </div>
+        </div>
+        
+        <!-- Employees Screen -->
+        <div class="screen" id="employees">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>بيانات الموظفين</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">أحمد محمد الشمري</div>
+                                <div class="item-secondary">مدير النظام</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">سعد علي الدوسري</div>
+                                <div class="item-secondary">فني خياطة</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">فاطمة أحمد العنزي</div>
+                                <div class="item-secondary">موظفة استقبال</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">عبدالله محمد الحربي</div>
+                                <div class="item-secondary">محاسب</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fab" onclick="navigateTo('new-employee')">
+                <i class="material-icons">add</i>
+            </div>
+        </div>
+        
+        <!-- Suppliers Screen -->
+        <div class="screen" id="suppliers">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>بيانات الموردين</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">مؤسسة الأقمشة المتميزة</div>
+                                <div class="item-secondary">جوال: 0555123456</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">شركة المدينة للخيوط</div>
+                                <div class="item-secondary">جوال: 0567891234</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div>
+                                <div class="item-primary">مؤسسة الخليج للإكسسوارات</div>
+                                <div class="item-secondary">جوال: 0561122334</div>
+                            </div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fab" onclick="navigateTo('new-supplier')">
+                <i class="material-icons">add</i>
+            </div>
+        </div>
+        
+        <!-- Inventory Reports Screen -->
+        <div class="screen" id="inventory-reports">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>تقارير المخزون</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="list-item">
+                            <div class="item-primary">الأصناف الأكثر استخداماً</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">الأصناف التي وصلت للحد الأدنى</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">حركة صنف معين</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-primary">قيمة المخزون الإجمالية</div>
+                            <i class="material-icons">chevron_left</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- New Invoice Screen -->
+        <div class="screen" id="new-invoice">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>فاتورة حجز جديدة</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="stepper">
+                            <div class="step active">
+                                <div class="step-circle">1</div>
+                                <div class="step-label">بيانات العميل</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-circle">2</div>
+                                <div class="step-label">المقاسات</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-circle">3</div>
+                                <div class="step-label">الموديلات</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-circle">4</div>
+                                <div class="step-label">الأقمشة</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-circle">5</div>
+                                <div class="step-label">التفاصيل والدفع</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">اختيار العميل</label>
+                            <select class="form-select">
+                                <option value="">اختر العميل...</option>
+                                <option value="1">محمد أحمد الزهراني</option>
+                                <option value="2">سارة علي المطيري</option>
+                                <option value="3">خالد عمر العتيبي</option>
+                                <option value="4">نورة سعيد القحطاني</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="form-button secondary">إضافة عميل جديد</button>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الجوال</label>
+                            <input type="tel" class="form-input" placeholder="05xxxxxxxx" value="0501234567" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">العنوان</label>
+                            <input type="text" class="form-input" placeholder="العنوان" value="الرياض - حي النخيل" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">ملاحظات</label>
+                            <textarea class="form-input" rows="3" placeholder="ملاحظات عن العميل"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button class="form-button">التالي</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- New Item Screen -->
+        <div class="screen" id="new-item">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>إضافة صنف جديد</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label class="form-label">اسم الصنف</label>
+                            <input type="text" class="form-input" placeholder="اسم الصنف">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">مجموعة الصنف</label>
+                            <select class="form-select">
+                                <option value="">اختر المجموعة...</option>
+                                <option value="fabrics">أقمشة</option>
+                                <option value="threads">خيوط</option>
+                                <option value="accessories">إكسسوارات</option>
+                                <option value="supplies">مستلزمات</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">وحدة القياس</label>
+                            <select class="form-select">
+                                <option value="">اختر الوحدة...</option>
+                                <option value="meter">متر</option>
+                                <option value="piece">قطعة</option>
+                                <option value="kg">كيلوجرام</option>
+                                <option value="box">علبة</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">سعر الوحدة</label>
+                            <input type="number" class="form-input" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الكمية الافتتاحية</label>
+                            <input type="number" class="form-input" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الحد الأدنى للمخزون</label>
+                            <input type="number" class="form-input" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المورد الرئيسي</label>
+                            <select class="form-select">
+                                <option value="">اختر المورد...</option>
+                                <option value="1">مؤسسة الأقمشة المتميزة</option>
+                                <option value="2">شركة المدينة للخيوط</option>
+                                <option value="3">مؤسسة الخليج للإكسسوارات</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">صورة الصنف</label>
+                            <input type="file" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <button class="form-button">حفظ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- New Customer Screen -->
+        <div class="screen" id="new-customer">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>إضافة عميل جديد</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-input" placeholder="الاسم الكامل">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الجوال</label>
+                            <input type="tel" class="form-input" placeholder="05xxxxxxxx">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-input" placeholder="example@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">العنوان</label>
+                            <input type="text" class="form-input" placeholder="العنوان">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">مستوى التسعير</label>
+                            <select class="form-select">
+                                <option value="regular">عادي</option>
+                                <option value="vip">VIP</option>
+                                <option value="wholesale">جملة</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">ملاحظات</label>
+                            <textarea class="form-input" rows="3" placeholder="ملاحظات عن العميل"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="form-button">حفظ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- New Employee Screen -->
+        <div class="screen" id="new-employee">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>إضافة موظف جديد</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-input" placeholder="الاسم الكامل">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الجوال</label>
+                            <input type="tel" class="form-input" placeholder="05xxxxxxxx">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-input" placeholder="example@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الوظيفة</label>
+                            <select class="form-select">
+                                <option value="">اختر الوظيفة...</option>
+                                <option value="manager">مدير</option>
+                                <option value="tailor">فني خياطة</option>
+                                <option value="receptionist">موظف استقبال</option>
+                                <option value="accountant">محاسب</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الفرع</label>
+                            <select class="form-select">
+                                <option value="">اختر الفرع...</option>
+                                <option value="main">الفرع الرئيسي</option>
+                                <option value="north">فرع الشمال</option>
+                                <option value="east">الفرع الشرقي</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">تاريخ التعيين</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المهارات</label>
+                            <textarea class="form-input" rows="3" placeholder="المهارات والخبرات"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">اسم المستخدم</label>
+                            <input type="text" class="form-input" placeholder="اسم المستخدم للنظام">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">كلمة المرور</label>
+                            <input type="password" class="form-input" placeholder="كلمة المرور">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">تأكيد كلمة المرور</label>
+                            <input type="password" class="form-input" placeholder="تأكيد كلمة المرور">
+                        </div>
+                        <div class="form-group">
+                            <button class="form-button">حفظ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- New Supplier Screen -->
+        <div class="screen" id="new-supplier">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>إضافة مورد جديد</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label class="form-label">اسم المورد</label>
+                            <input type="text" class="form-input" placeholder="اسم الشركة/المؤسسة">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المسؤول</label>
+                            <input type="text" class="form-input" placeholder="اسم المسؤول">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الجوال</label>
+                            <input type="tel" class="form-input" placeholder="05xxxxxxxx">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-input" placeholder="example@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">العنوان</label>
+                            <input type="text" class="form-input" placeholder="العنوان">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الأصناف التي يوفرها</label>
+                            <textarea class="form-input" rows="3" placeholder="وصف للأصناف التي يوفرها المورد"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">شروط الدفع</label>
+                            <select class="form-select">
+                                <option value="cash">نقدي</option>
+                                <option value="credit30">آجل 30 يوم</option>
+                                <option value="credit60">آجل 60 يوم</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="form-button">حفظ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <a href="#" class="nav-item active" onclick="navigateTo('dashboard')">
+                <i class="material-icons">dashboard</i>
+                <span>الرئيسية</span>
+            </a>
+            <a href="#" class="nav-item" onclick="navigateTo('operations')">
+                <i class="material-icons">assignment</i>
+                <span>العمليات</span>
+            </a>
+            <a href="#" class="nav-item" onclick="navigateTo('inventory')">
+                <i class="material-icons">inventory</i>
+                <span>المخزون</span>
+            </a>
+            <a href="#" class="nav-item" onclick="navigateTo('reports')">
+                <i class="material-icons">bar_chart</i>
+                <span>التقارير</span>
+            </a>
+            <a href="#" class="nav-item" onclick="toggleDrawer()">
+                <i class="material-icons">more_horiz</i>
+                <span>المزيد</span>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // Track navigation history
+        let navigationHistory = ['dashboard'];
+        let currentScreen = 'dashboard';
+        
+        // Toggle drawer menu
+        function toggleDrawer() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            drawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        
+        // Navigate to a screen
+        function navigateTo(screenId) {
+            // If drawer is open, close it
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer.classList.contains('active')) {
+                drawer.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+            
+            // Hide current screen
+            document.getElementById(currentScreen).classList.remove('active');
+            
+            // Show new screen
+            document.getElementById(screenId).classList.add('active');
+            
+            // Update navigation history
+            if (screenId !== currentScreen) {
+                navigationHistory.push(screenId);
+            }
+            
+            // Update current screen
+            currentScreen = screenId;
+            
+            // Update title
+            updateTitle(screenId);
+            
+            // Update active nav item
+            updateActiveNavItem(screenId);
+        }
+        
+        // Go back to previous screen
+        function goBack() {
+            if (navigationHistory.length > 1) {
+                navigationHistory.pop(); // Remove current screen
+                const previousScreen = navigationHistory[navigationHistory.length - 1];
+                
+                // Hide current screen
+                document.getElementById(currentScreen).classList.remove('active');
+                
+                // Show previous screen
+                document.getElementById(previousScreen).classList.add('active');
+                
+                // Update current screen
+                currentScreen = previousScreen;
+                
+                // Update title
+                updateTitle(previousScreen);
+                
+                // Update active nav item
+                updateActiveNavItem(previousScreen);
+            }
+        }
+        
+        // Update page title
+        function updateTitle(screenId) {
+            const titleElement = document.getElementById('screen-title');
+            switch (screenId) {
+                case 'dashboard':
+                    titleElement.textContent = 'الرئيسية';
+                    break;
+                case 'operations':
+                    titleElement.textContent = 'العمليات';
+                    break;
+                case 'inventory':
+                    titleElement.textContent = 'المخزون';
+                    break;
+                case 'setup':
+                    titleElement.textContent = 'إعدادات النظام';
+                    break;
+                case 'reports':
+                    titleElement.textContent = 'التقارير';
+                    break;
+                case 'customers':
+                    titleElement.textContent = 'بيانات العملاء';
+                    break;
+                case 'employees':
+                    titleElement.textContent = 'بيانات الموظفين';
+                    break;
+                case 'suppliers':
+                    titleElement.textContent = 'بيانات الموردين';
+                    break;
+                case 'inventory-reports':
+                    titleElement.textContent = 'تقارير المخزون';
+                    break;
+                case 'new-invoice':
+                    titleElement.textContent = 'فاتورة حجز جديدة';
+                    break;
+                case 'new-item':
+                    titleElement.textContent = 'إضافة صنف جديد';
+                    break;
+                case 'new-customer':
+                    titleElement.textContent = 'إضافة عميل جديد';
+                    break;
+                case 'new-employee':
+                    titleElement.textContent = 'إضافة موظف جديد';
+                    break;
+                case 'new-supplier':
+                    titleElement.textContent = 'إضافة مورد جديد';
+                    break;
+                default:
+                    titleElement.textContent = 'نظام إدارة عمليات الخياطة';
+            }
+        }
+        
+        // Update active nav item
+        function updateActiveNavItem(screenId) {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            let activeNavId = '';
+            switch (screenId) {
+                case 'dashboard':
+                    activeNavId = 'dashboard';
+                    break;
+                case 'operations':
+                case 'new-invoice':
+                    activeNavId = 'operations';
+                    break;
+                case 'inventory':
+                case 'new-item':
+                    activeNavId = 'inventory';
+                    break;
+                case 'reports':
+                case 'inventory-reports':
+                    activeNavId = 'reports';
+                    break;
+                default:
+                    // For other screens, don't highlight any nav item
+                    return;
+            }
+            
+            const navLinks = document.querySelectorAll('.nav-item');
+            navLinks.forEach(link => {
+                if (link.getAttribute('onclick').includes(activeNavId)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Switch tabs
+        function switchTab(tabId, tabElement) {
+            // Update active tab
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            tabElement.classList.add('active');
+            
+            // Update tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            document.getElementById(tabId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
