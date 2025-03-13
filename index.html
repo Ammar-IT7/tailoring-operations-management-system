@@ -343,7 +343,10 @@
         .fab:hover {
             transform: scale(1.05);
         }
-        
+        .fab span{
+            font-size: 10px;
+            font-weight: 500;
+        }
         .tab-container {
             margin-bottom: 16px;
         }
@@ -581,6 +584,320 @@
             font-feature-settings: 'liga';
             -webkit-font-smoothing: antialiased;
         }
+
+
+/* New Invoice Styles */
+.inv-content {
+    padding: 10px;
+}
+
+.inv-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 60px;
+    overflow: hidden;
+}
+
+.inv-card-header {
+    padding: 16px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.inv-card-header h2 {
+    margin: 0 0 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+.inv-card-content {
+    padding: 16px;
+}
+
+/* Progress Bar & Step Indicators */
+.inv-progress-bar {
+    height: 4px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    margin: 0 auto 10px;
+    position: relative;
+}
+
+.inv-step-indicator {
+    position: absolute;
+    height: 100%;
+    background-color: #28a745;
+    border-radius: 4px;
+    width: 20%; /* Will be updated via JS */
+    transition: width 0.3s ease;
+}
+
+.inv-step-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.inv-step-label {
+    font-size: 11px;
+    color: #6c757d;
+    flex: 1;
+    text-align: center;
+    padding: 4px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.inv-step-label.active {
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Form Elements */
+.inv-section-header {
+    margin: 15px 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.inv-section-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #495057;
+}
+
+.inv-form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -8px 15px;
+}
+
+.inv-form-group {
+    flex: 1 0 100%;
+    padding: 0 8px;
+    margin-bottom: 10px;
+}
+
+@media (min-width: 576px) {
+    .inv-form-group {
+        flex: 0 0 50%;
+    }
+}
+
+.inv-form-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #495057;
+}
+
+.inv-form-input,
+.inv-form-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #495057;
+    background-color: #fff;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.inv-form-input:focus,
+.inv-form-select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.inv-input-with-button {
+    display: flex;
+    width: 100%;
+}
+
+.inv-input-with-button .inv-form-input,
+.inv-input-with-button .inv-form-select {
+    flex: 1;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.inv-icon-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.inv-icon-button:hover {
+    background-color: #5a6268;
+}
+
+.inv-required {
+    color: #dc3545;
+}
+
+/* Table Styles */
+.inv-items-table-container {
+    overflow-x: auto;
+    margin: 15px 0;
+}
+
+.inv-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.inv-items-table th, 
+.inv-items-table td {
+    padding: 10px;
+    text-align: right;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 14px;
+}
+
+.inv-items-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #495057;
+}
+
+/* Models Styles */
+.inv-models-container {
+    margin: 15px 0;
+}
+
+.inv-models-group {
+    margin-bottom: 20px;
+}
+
+.inv-models-group h4 {
+    font-size: 15px;
+    margin: 0 0 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e9ecef;
+    color: #495057;
+}
+
+.inv-models-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.inv-model-item {
+    width: calc(33.333% - 10px);
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.inv-model-item:hover {
+    border-color: #6c757d;
+}
+
+.inv-model-item.selected {
+    border-color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.inv-model-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.inv-model-item span {
+    display: block;
+    font-size: 13px;
+    color: #495057;
+}
+
+/* Step Navigation Buttons */
+.inv-step-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+.inv-form-button {
+    min-width: 100px;
+    padding: 10px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.inv-form-button.inv-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.inv-form-button.inv-primary:hover {
+    background-color: #0069d9;
+}
+
+.inv-form-button.inv-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.inv-form-button.inv-secondary:hover {
+    background-color: #5a6268;
+}
+
+.inv-form-button.inv-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.inv-form-button.inv-success:hover {
+    background-color: #218838;
+}
+
+.inv-form-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsiveness Fixes */
+@media (max-width: 576px) {
+    .inv-model-item {
+        width: calc(50% - 10px);
+    }
+    
+    .inv-step-label {
+        font-size: 10px;
+    }
+}
+
+/* End Inv-section */
+
     </style>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -840,10 +1157,6 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="fab" onclick="navigateTo('new-invoice')">
-                <i class="material-icons">add</i>
-            </div>
         </div>
         
         <!-- Bottom Navigation -->
@@ -910,6 +1223,10 @@
                                 </div>
                                 <i class="material-icons">chevron_left</i>
                             </div>
+                        </div>
+                        <div class="fab" onclick="navigateTo('new-invoice')">
+                            <i class="material-icons">add</i>
+                            <span>فاتورة حجز</span>
                         </div>
                     </div>
                 </div>
@@ -1009,10 +1326,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="fab" onclick="navigateTo('new-invoice')">
-                <i class="material-icons">add</i>
             </div>
         </div>
         
@@ -1137,10 +1450,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="fab" onclick="navigateTo('new-item')">
-                <i class="material-icons">add</i>
             </div>
         </div>
         
@@ -1269,10 +1578,6 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="fab" onclick="navigateTo('new-customer')">
-                <i class="material-icons">add</i>
-            </div>
         </div> -->
         
         <!-- Employees Screen -->
@@ -1314,10 +1619,6 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="fab" onclick="navigateTo('new-employee')">
-                <i class="material-icons">add</i>
-            </div>
         </div> -->
         
         <!-- Suppliers Screen -->
@@ -1352,10 +1653,6 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="fab" onclick="navigateTo('new-supplier')">
-                <i class="material-icons">add</i>
-            </div>
         </div> -->
         
         <!-- Inventory Reports Screen -->
@@ -1388,69 +1685,388 @@
         </div> -->
         
         <!-- New Invoice Screen -->
-        <!-- <div class="screen" id="new-invoice">
-            <div class="content">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>فاتورة حجز جديدة</h2>
+        <div class="screen" id="new-invoice">
+            <div class="inv-content">
+                <div class="inv-card">
+                    <div class="inv-card-header">
+                        <h2>فاتورة حجز</h2>
+                        <div class="inv-progress-bar">
+                            <div class="inv-step-indicator" id="inv-step-indicator"></div>
+                        </div>
+                        <div class="inv-step-labels">
+                            <span class="inv-step-label active" data-step="1">البيانات الرئيسية</span>
+                            <span class="inv-step-label" data-step="2">بيانات المنتج</span>
+                            <span class="inv-step-label" data-step="3">الموديلات</span>
+                            <span class="inv-step-label" data-step="4">المقاسات</span>
+                            <span class="inv-step-label" data-step="5">ملخص الفاتورة</span>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <div class="stepper">
-                            <div class="step active">
-                                <div class="step-circle">1</div>
-                                <div class="step-label">بيانات العميل</div>
+
+                    <div class="inv-card-content">
+                        <!-- Step 1: البيانات الرئيسية -->
+                        <div class="inv-step" id="inv-step-1">
+                            <div class="inv-section-header">
+                                <h3>البيانات الرئيسية</h3>
                             </div>
-                            <div class="step">
-                                <div class="step-circle">2</div>
-                                <div class="step-label">المقاسات</div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">رقم الفاتورة</label>
+                                    <input type="text" class="inv-form-input" readonly value="10045" placeholder="يتم إنشاؤه تلقائياً">
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">تاريخ الفاتورة</label>
+                                    <input type="text" class="inv-form-input" readonly value="12/03/2025" placeholder="التاريخ الحالي">
+                                </div>
                             </div>
-                            <div class="step">
-                                <div class="step-circle">3</div>
-                                <div class="step-label">الموديلات</div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">العميل <span class="inv-required">*</span></label>
+                                    <div class="inv-input-with-button">
+                                        <select class="inv-form-select" id="inv-customer">
+                                            <option value="">اختر العميل...</option>
+                                            <option value="1">محمد أحمد الزهراني</option>
+                                            <option value="2">سارة علي المطيري</option>
+                                            <option value="3">خالد عمر العتيبي</option>
+                                            <option value="4">نورة سعيد القحطاني</option>
+                                        </select>
+                                        <button class="inv-icon-button" title="إضافة عميل جديد">
+                                            <i class="material-icons">add</i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">الجوال / الهاتف</label>
+                                    <input type="tel" class="inv-form-input" id="inv-phone" placeholder="سيظهر تلقائياً" readonly>
+                                </div>
                             </div>
-                            <div class="step">
-                                <div class="step-circle">4</div>
-                                <div class="step-label">الأقمشة</div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">طريقة الدفع</label>
+                                    <select class="inv-form-select" id="inv-payment-method" onchange="invTogglePaymentFields()">
+                                        <option value="cash">نقداً</option>
+                                        <option value="credit">آجل</option>
+                                    </select>
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">الصندوق</label>
+                                    <select class="inv-form-select" id="inv-cashbox">
+                                        <option value="1">الصندوق الرئيسي</option>
+                                        <option value="2">صندوق الفرع</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="step">
-                                <div class="step-circle">5</div>
-                                <div class="step-label">التفاصيل والدفع</div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">العملة</label>
+                                    <select class="inv-form-select" id="inv-currency" onchange="invUpdateExchangeRate()">
+                                        <option value="sar">ريال يمني</option>
+                                        <option value="usd">دولار أمريكي</option>
+                                    </select>
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">سعر الصرف</label>
+                                    <input type="number" class="inv-form-input" id="inv-exchange-rate" value="1" readonly>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">اختيار العميل</label>
-                            <select class="form-select">
-                                <option value="">اختر العميل...</option>
-                                <option value="1">محمد أحمد الزهراني</option>
-                                <option value="2">سارة علي المطيري</option>
-                                <option value="3">خالد عمر العتيبي</option>
-                                <option value="4">نورة سعيد القحطاني</option>
-                            </select>
+
+                        <!-- Step 2: بيانات المنتج -->
+                        <div class="inv-step" id="inv-step-2" style="display: none;">
+                            <div class="inv-section-header">
+                                <h3>البيانات التفصيلية</h3>
+                            </div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">نوع الخياطة</label>
+                                    <select class="inv-form-select" id="inv-tailoring-type">
+                                        <option value="">اختر نوع الخياطة...</option>
+                                        <option value="1">قميص</option>
+                                        <option value="2">ثوب</option>
+                                        <option value="3">بنطلون</option>
+                                        <option value="4">جاكيت</option>
+                                    </select>
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">المستفيد</label>
+                                    <div class="inv-input-with-button">
+                                        <select class="inv-form-select" id="inv-beneficiary">
+                                            <option value="">اختر المستفيد...</option>
+                                            <!-- سيتم تعبئة هذه القائمة بعد اختيار العميل -->
+                                        </select>
+                                        <button class="inv-icon-button" title="إضافة مستفيد جديد">
+                                            <i class="material-icons">person_add</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">الصنف</label>
+                                    <select class="inv-form-select" id="inv-item">
+                                        <option value="">اختر الصنف...</option>
+                                        <option value="1">قماش ياباني</option>
+                                        <option value="2">قماش إنجليزي</option>
+                                        <option value="3">قماش مصري</option>
+                                    </select>
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">عدد القطع</label>
+                                    <input type="number" class="inv-form-input" id="inv-pieces-count" value="1" min="1" onchange="invCalculateItemTotal()">
+                                </div>
+                            </div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">السعر</label>
+                                    <input type="number" class="inv-form-input" id="inv-price" readonly>
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">إجمالي السعر</label>
+                                    <input type="number" class="inv-form-input" id="inv-total-price" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">الكمية المتوفرة</label>
+                                    <input type="number" class="inv-form-input" id="inv-available-quantity" readonly>
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">الكمية المخزنية</label>
+                                    <input type="number" class="inv-form-input" id="inv-stock-quantity">
+                                </div>
+                            </div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">مواصفات الخيط</label>
+                                    <select class="inv-form-select" id="inv-thread-specs">
+                                        <option value="1">عام</option>
+                                        <option value="2">ممتاز</option>
+                                        <option value="3">حرير</option>
+                                    </select>
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">أنواع الحياكة</label>
+                                    <select class="inv-form-select" id="inv-sewing-type">
+                                        <option value="1">عام</option>
+                                        <option value="2">بارز</option>
+                                        <option value="3">مخفي</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="inv-form-group">
+                                <label class="inv-form-label">البيان</label>
+                                <textarea class="inv-form-input" id="inv-item-note" rows="2" placeholder="ملاحظات عن الصنف"></textarea>
+                            </div>
+                            
+                            <div class="inv-form-group">
+                                <button class="inv-form-button inv-primary" id="inv-add-item-button" onclick="invAddItem()">
+                                    <i class="material-icons">add</i>
+                                    إضافة العنصر
+                                </button>
+                            </div>
+                            
+                            <div class="inv-items-table-container">
+                                <table class="inv-items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>م</th>
+                                            <th>المستفيد</th>
+                                            <th>الصنف</th>
+                                            <th>الكمية</th>
+                                            <th>السعر</th>
+                                            <th>الإجمالي</th>
+                                            <th>الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inv-items-container">
+                                        <!-- سيتم إضافة الأصناف هنا عند النقر على زر إضافة -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <button class="form-button secondary">إضافة عميل جديد</button>
+
+                        <!-- Step 3: الموديلات -->
+                        <div class="inv-step" id="inv-step-3" style="display: none;">
+                            <div class="inv-section-header">
+                                <h3>الموديلات</h3>
+                            </div>
+                            
+                            <div class="inv-models-container">
+                                <div class="inv-models-group">
+                                    <h4>اليد</h4>
+                                    <div class="inv-models-items">
+                                        <div class="inv-model-item" onclick="invSelectModel(this)">
+                                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjVmNWY1Ii8+PHRleHQgeD0iMzAiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZpbGw9IiM4ODgiPtmF2YjYr2nZhCAxPC90ZXh0Pjwvc3ZnPg==" alt="1">
+                                            <span>عادي</span>
+                                        </div>
+                                        <div class="inv-model-item" onclick="invSelectModel(this)">
+                                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjVmNWY1Ii8+PHRleHQgeD0iMzAiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZpbGw9IiM4ODgiPtmF2YjYr2nZhCAyPC90ZXh0Pjwvc3ZnPg==" alt="2">
+                                            <span>مدور</span>
+                                        </div>
+                                        <div class="inv-model-item" onclick="invSelectModel(this)">
+                                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjVmNWY1Ii8+PHRleHQgeD0iMzAiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZpbGw9IiM4ODgiPtmF2YjYr2nZhCAzPC90ZXh0Pjwvc3ZnPg==" alt="3">
+                                            <span>مثلث</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="inv-models-group">
+                                    <h4>الياقة</h4>
+                                    <div class="inv-models-items">
+                                        <div class="inv-model-item" onclick="invSelectModel(this)">
+                                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjVmNWY1Ii8+PHRleHQgeD0iMzAiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZpbGw9IiM4ODgiPtmK2KfZgtipIDE8L3RleHQ+PC9zdmc+" alt="1">
+                                            <span>عادية</span>
+                                        </div>
+                                        <div class="inv-model-item" onclick="invSelectModel(this)">
+                                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjVmNWY1Ii8+PHRleHQgeD0iMzAiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZpbGw9IiM4ODgiPtmK2KfZgtipIDI8L3RleHQ+PC9zdmc+" alt="2">
+                                            <span>فرنسية</span>
+                                        </div>
+                                        <div class="inv-model-item" onclick="invSelectModel(this)">
+                                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjVmNWY1Ii8+PHRleHQgeD0iMzAiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZpbGw9IiM4ODgiPtmK2KfZgtipIDM8L3RleHQ+PC9zdmc+" alt="3">
+                                            <span>ماندرين</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">رقم الجوال</label>
-                            <input type="tel" class="form-input" placeholder="05xxxxxxxx" value="0501234567" readonly>
+
+                        <!-- Step 4: المقاسات -->
+                        <div class="inv-step" id="inv-step-4" style="display: none;">
+                            <div class="inv-section-header">
+                                <h3>المقاسات</h3>
+                            </div>
+                            
+                            <div class="inv-form-row">
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">نوع المقاس</label>
+                                    <select class="inv-form-select" id="inv-size-type" onchange="invToggleSizeFields()">
+                                        <option value="general">عام</option>
+                                        <option value="small">صغير</option>
+                                        <option value="medium">متوسط</option>
+                                        <option value="large">كبير</option>
+                                    </select>
+                                </div>
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">المعمل</label>
+                                    <select class="inv-form-select" id="inv-factory">
+                                        <option value="1">المعمل الرئيسي</option>
+                                        <option value="2">معمل الفرع</option>
+                                        <option value="3">معمل خارجي</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div id="inv-general-sizes" class="inv-size-form">
+                                <div class="inv-form-row">
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">الطول</label>
+                                        <input type="number" class="inv-form-input" id="inv-length" placeholder="الطول">
+                                    </div>
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">الصدر</label>
+                                        <input type="number" class="inv-form-input" id="inv-chest" placeholder="الصدر">
+                                    </div>
+                                </div>
+                                <div class="inv-form-row">
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">الكتف</label>
+                                        <input type="number" class="inv-form-input" id="inv-shoulder" placeholder="الكتف">
+                                    </div>
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">طول اليد</label>
+                                        <input type="number" class="inv-form-input" id="inv-arm-length" placeholder="طول اليد">
+                                    </div>
+                                </div>
+                                <div class="inv-form-row">
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">وسع اليد</label>
+                                        <input type="number" class="inv-form-input" id="inv-arm-width" placeholder="وسع اليد">
+                                    </div>
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">الرقبة</label>
+                                        <input type="number" class="inv-form-input" id="inv-neck" placeholder="الرقبة">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">العنوان</label>
-                            <input type="text" class="form-input" placeholder="العنوان" value="الرياض - حي النخيل" readonly>
+
+                        <!-- Step 5: ملخص الفاتورة -->
+                        <div class="inv-step" id="inv-step-5" style="display: none;">
+                            <div class="inv-section-header">
+                                <h3>ملخص الفاتورة</h3>
+                            </div>
+                            
+                            <div class="inv-invoice-summary">
+                                <div class="inv-form-row">
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">إجمالي الفاتورة</label>
+                                        <input type="number" class="inv-form-input" id="inv-invoice-total" readonly>
+                                    </div>
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">التخفيض</label>
+                                        <input type="number" class="inv-form-input" id="inv-discount" value="0" min="0" onchange="invCalculateTotal()">
+                                    </div>
+                                </div>
+                                
+                                <div class="inv-form-row">
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">الإجمالي بعد التخفيض</label>
+                                        <input type="number" class="inv-form-input" id="inv-total-after-discount" readonly>
+                                    </div>
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">إجمالي الضريبة</label>
+                                        <input type="number" class="inv-form-input" id="inv-tax-total" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="inv-form-row">
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">الإجمالي الكلي</label>
+                                        <input type="number" class="inv-form-input" id="inv-grand-total" readonly>
+                                    </div>
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">المبلغ المدفوع</label>
+                                        <input type="number" class="inv-form-input" id="inv-paid-amount" value="0" min="0" onchange="invCalculateRemaining()">
+                                    </div>
+                                </div>
+                                
+                                <div class="inv-form-row">
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">المبلغ المتبقي</label>
+                                        <input type="number" class="inv-form-input" id="inv-remaining-amount" readonly>
+                                    </div>
+                                    <div class="inv-form-group">
+                                        <label class="inv-form-label">تاريخ التسليم</label>
+                                        <input type="date" class="inv-form-input" id="inv-delivery-date">
+                                    </div>
+                                </div>
+                                
+                                <div class="inv-form-group">
+                                    <label class="inv-form-label">البيان</label>
+                                    <textarea class="inv-form-input" id="inv-invoice-note" rows="2" placeholder="ملاحظات عامة للفاتورة"></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">ملاحظات</label>
-                            <textarea class="form-input" rows="3" placeholder="ملاحظات عن العميل"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <button class="form-button">التالي</button>
+
+                        <!-- Step Navigation Controls -->
+                        <div class="inv-step-controls">
+                            <button class="inv-form-button inv-secondary" id="inv-prev-btn" onclick="invPrevStep()" disabled>السابق</button>
+                            <button class="inv-form-button inv-primary" id="inv-next-btn" onclick="invNextStep()">التالي</button>
+                            <button class="inv-form-button inv-success" id="inv-save-btn" onclick="invSaveInvoice()" style="display: none;">حفظ الفاتورة</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         
         <!-- Measurements Screen -->
         <!-- <div class="screen" id="measurements">
@@ -3137,6 +3753,222 @@
             // For demo, we'll just navigate to the item details screen
             navigateTo('item-details');
         }
+
+// Current step tracking
+let invCurrentStep = 1;
+const invTotalSteps = 5;
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', function() {
+    updateProgressBar();
+});
+
+// Navigation between steps
+function invNextStep() {
+    if (invCurrentStep < invTotalSteps) {
+        // Validate current step (would add real validation in production)
+        if (validateCurrentStep()) {
+            document.getElementById(`inv-step-${invCurrentStep}`).style.display = 'none';
+            invCurrentStep++;
+            document.getElementById(`inv-step-${invCurrentStep}`).style.display = 'block';
+            
+            // Enable or disable navigation buttons
+            document.getElementById('inv-prev-btn').disabled = false;
+            
+            if (invCurrentStep === invTotalSteps) {
+                document.getElementById('inv-next-btn').style.display = 'none';
+                document.getElementById('inv-save-btn').style.display = 'block';
+            }
+            
+            updateProgressBar();
+            updateStepLabels();
+        }
+    }
+}
+
+function invPrevStep() {
+    if (invCurrentStep > 1) {
+        document.getElementById(`inv-step-${invCurrentStep}`).style.display = 'none';
+        invCurrentStep--;
+        document.getElementById(`inv-step-${invCurrentStep}`).style.display = 'block';
+        
+        // Enable or disable navigation buttons
+        document.getElementById('inv-prev-btn').disabled = (invCurrentStep === 1);
+        
+        if (invCurrentStep < invTotalSteps) {
+            document.getElementById('inv-next-btn').style.display = 'block';
+            document.getElementById('inv-save-btn').style.display = 'none';
+        }
+        
+        updateProgressBar();
+        updateStepLabels();
+    }
+}
+
+function updateProgressBar() {
+    const progressPercentage = (invCurrentStep / invTotalSteps) * 100;
+    document.getElementById('inv-step-indicator').style.width = `${progressPercentage}%`;
+}
+
+function updateStepLabels() {
+    const stepLabels = document.querySelectorAll('.inv-step-label');
+    stepLabels.forEach(label => {
+        const step = parseInt(label.dataset.step);
+        if (step === invCurrentStep) {
+            label.classList.add('active');
+        } else {
+            label.classList.remove('active');
+        }
+    });
+}
+
+// Basic validation - would be more comprehensive in production
+function validateCurrentStep() {
+    // Just a placeholder for real validation
+    return true;
+}
+
+// Toggle payment fields based on payment method
+function invTogglePaymentFields() {
+    const paymentMethod = document.getElementById('inv-payment-method').value;
+    const paidAmount = document.getElementById('inv-paid-amount');
+    
+    if (paymentMethod === 'credit') {
+        paidAmount.placeholder = 'دفعة مقدمة (اختياري)';
+    } else {
+        paidAmount.placeholder = 'المبلغ المدفوع';
+        paidAmount.value = document.getElementById('inv-grand-total').value || 0;
+    }
+    
+    invCalculateRemaining();
+}
+
+// Update exchange rate based on selected currency
+function invUpdateExchangeRate() {
+    const currency = document.getElementById('inv-currency').value;
+    const exchangeRate = document.getElementById('inv-exchange-rate');
+    
+    // Example exchange rates
+    switch(currency) {
+        case 'usd':
+            exchangeRate.value = 3.75;
+            break;
+        case 'aed':
+            exchangeRate.value = 1.02;
+            break;
+        default:
+            exchangeRate.value = 1;
+    }
+    
+    // Recalculate totals
+    invCalculateTotal();
+}
+
+// Toggle size fields based on size type
+function invToggleSizeFields() {
+    const sizeType = document.getElementById('inv-size-type').value;
+    const generalSizes = document.getElementById('inv-general-sizes');
+    
+    if (sizeType === 'general') {
+        generalSizes.style.display = 'block';
+    } else {
+        generalSizes.style.display = 'none';
+    }
+}
+
+// Calculate item total
+function invCalculateItemTotal() {
+    const price = parseFloat(document.getElementById('inv-price').value) || 0;
+    const count = parseInt(document.getElementById('inv-pieces-count').value) || 0;
+    document.getElementById('inv-total-price').value = (price * count).toFixed(2);
+}
+
+// Calculate invoice totals
+function invCalculateTotal() {
+    // Placeholder for actual calculation logic
+    const invoiceTotal = 1000; // Example value
+    const discount = parseFloat(document.getElementById('inv-discount').value) || 0;
+    const totalAfterDiscount = invoiceTotal - discount;
+    const taxRate = 0.15; // 15% VAT
+    const taxTotal = totalAfterDiscount * taxRate;
+    const grandTotal = totalAfterDiscount + taxTotal;
+    
+    document.getElementById('inv-invoice-total').value = invoiceTotal.toFixed(2);
+    document.getElementById('inv-total-after-discount').value = totalAfterDiscount.toFixed(2);
+    document.getElementById('inv-tax-total').value = taxTotal.toFixed(2);
+    document.getElementById('inv-grand-total').value = grandTotal.toFixed(2);
+    
+    invCalculateRemaining();
+}
+
+// Calculate remaining amount
+function invCalculateRemaining() {
+    const grandTotal = parseFloat(document.getElementById('inv-grand-total').value) || 0;
+    const paidAmount = parseFloat(document.getElementById('inv-paid-amount').value) || 0;
+    const remainingAmount = grandTotal - paidAmount;
+    
+    document.getElementById('inv-remaining-amount').value = remainingAmount.toFixed(2);
+}
+
+// Select a model
+function invSelectModel(element) {
+    // Deselect all models in the same group
+    const group = element.closest('.inv-models-group');
+    const models = group.querySelectorAll('.inv-model-item');
+    
+    models.forEach(model => {
+        model.classList.remove('selected');
+    });
+    
+    // Select the clicked model
+    element.classList.add('selected');
+}
+
+// Add item to invoice
+function invAddItem() {
+    // Placeholder for item addition logic
+    alert('تم إضافة العنصر بنجاح');
+    
+    // You would normally create a table row here with item details
+    const itemsContainer = document.getElementById('inv-items-container');
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td>1</td>
+        <td>محمد أحمد</td>
+        <td>قماش ياباني</td>
+        <td>2</td>
+        <td>200</td>
+        <td>400</td>
+        <td>
+            <button class="inv-icon-button" style="background-color: #dc3545; width: 30px; height: 30px;">
+                <i class="material-icons" style="font-size: 16px;">delete</i>
+            </button>
+        </td>
+    `;
+    itemsContainer.appendChild(newRow);
+    
+    // Calculate invoice total
+    invCalculateTotal();
+    
+    // Clear form fields
+    document.getElementById('inv-pieces-count').value = 1;
+    document.getElementById('inv-price').value = '';
+    document.getElementById('inv-total-price').value = '';
+}
+
+// Save invoice
+function invSaveInvoice() {
+    // Placeholder for save logic
+    alert('تم حفظ الفاتورة بنجاح');
+    // In a real app, this would validate all data and send to server
+}
+
+// Initialize calculations on page load
+window.onload = function() {
+    invCalculateTotal();
+    invTogglePaymentFields();
+    invToggleSizeFields();
+};
     </script>
 </body>
 </html>
