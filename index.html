@@ -1565,12 +1565,10 @@
                                 </div>
                                 <i class="material-icons">chevron_left</i>
                             </div>
-                        </div>
-                  
-                    </div>
-                    <div class="fab" onclick="navigateTo('cashReceipt')">
+                        </div>  <div class="fab" onclick="navigateTo('cashReceipt')">
                         <i class="material-icons">add</i>
                         <span>إضافة</span>
+                    </div>
                     </div>
                 </div>
                 
@@ -1627,6 +1625,7 @@
                             <i class="material-icons">add</i>
                             <span>إضافة</span>
                         </div>
+                        
                     </div>
                 </div>
                 
@@ -1651,10 +1650,42 @@
                                 <i class="material-icons">chevron_left</i>
                 </div>
             </div>
+            <div class="fab" onclick="navigateTo('processing')">
+                <i class="material-icons">add</i>
+                <span>إضافة</span>
+            </div>
         </div>
+                </div>
+
+                <div class="tab-content" id="delivery" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>سجل التسليم</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">2025-03-4 - سارة علي</div>
+                                    <div class="item-secondary">2025-03-2 فستان سهرة</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                            </div>
+                            <div class="list-item">
+                                <div>
+                                    <div class="item-primary">2025-03-14 - خالد عمر</div>
+                                    <div class="item-secondary">بدلة رسمية - 2025-03-12</div>
+                                </div>
+                                <i class="material-icons">chevron_left</i>
+                </div>
+            </div>
+            <div class="fab" onclick="navigateTo('new-delivery')">
+                <i class="material-icons">add</i>
+                <span>إضافة</span>
+            </div>
         </div>
     </div>
-        </div>
+</div>
+</div>
         
         <!-- Inventory Screen -->
         <div class="screen" id="inventory">
@@ -3058,7 +3089,7 @@
         </div>
 
         <!-- Delivery Screen (التسليم) -->
-        <div class="screen" id="delivery">
+        <div class="screen" id="new-delivery">
             <div class="content">
                 <div class="card">
                     <div class="card-header">
