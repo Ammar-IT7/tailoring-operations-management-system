@@ -885,6 +885,319 @@
     cursor: not-allowed;
 }
 
+
+
+
+/* Form Styles */
+.form-section {
+    margin-bottom: 25px;
+}
+
+.form-section h3 {
+    font-size: 16px;
+    color: #3f51b5;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.form-row {
+    display: flex;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.form-group:last-child {
+    margin-left: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #3f51b5;
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group.full-width {
+    width: 100%;
+    flex: none;
+}
+
+/* Buttons */
+.add-button, .action-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.add-button:hover, .action-button:hover {
+    background-color: #388e3c;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.save-button, .cancel-button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.save-button {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+}
+
+.save-button:hover {
+    background-color: #303f9f;
+}
+
+.cancel-button {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.cancel-button:hover {
+    background-color: #f5f5f5;
+}
+
+.delete-button {
+    background-color: transparent;
+    color: #f44336;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.delete-button:hover {
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+.add-row-button {
+    background-color: transparent;
+    color: #3f51b5;
+    border: 1px dashed #3f51b5;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.add-row-button:hover {
+    background-color: rgba(63, 81, 181, 0.05);
+}
+
+.add-row-button i {
+    margin-left: 5px;
+}
+
+/* Icons */
+.material-icons {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+/* Input with icon */
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    padding-left: 30px;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+/* Detail Table */
+.detail-table {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.table-header {
+    display: flex;
+    background-color: #f5f5f5;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table-row {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+.th, .td {
+    padding: 10px;
+    flex: 1;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.td input, .td select {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Checkbox & Radio Styles */
+.checkbox-group, .radio-group {
+    display: flex;
+    align-items: center;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.radio-item {
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.radio-item:last-child {
+    margin-left: 0;
+}
+
+.checkbox-group input[type="checkbox"],
+.radio-item input[type="radio"] {
+    margin-left: 6px;
+}
+
+/* Cash Receipt Screen Specific */
+#cashReceipt .detail-table .th:nth-child(1),
+#cashReceipt .detail-table .td:nth-child(1) {
+    flex: 2;
+}
+
+/* Payment Voucher Screen Specific */
+#paymentVoucher .detail-table .th:nth-child(1),
+#paymentVoucher .detail-table .td:nth-child(1) {
+    flex: 2;
+}
+
+/* Inventory Supply Order Screen Specific */
+#inventorySupply .detail-table .th:nth-child(1),
+#inventorySupply .detail-table .td:nth-child(1) {
+    flex: 2;
+}
+
+#inventorySupply .detail-table .th:nth-child(6),
+#inventorySupply .detail-table .td:nth-child(6) {
+    flex: 2;
+}
+
+/* Inventory Disbursement Order Screen Specific */
+#inventoryDisbursement .detail-table .th:nth-child(1),
+#inventoryDisbursement .detail-table .td:nth-child(1) {
+    flex: 2;
+}
+
+#inventoryDisbursement .detail-table .th:nth-child(6),
+#inventoryDisbursement .detail-table .td:nth-child(6) {
+    flex: 2;
+}
+
+/* Processing Screen Specific */
+#processing .form-section:nth-child(3) {
+    margin-top: 30px;
+}
+
+/* Delivery Screen Specific */
+#delivery .detail-table .th:nth-child(1),
+#delivery .detail-table .td:nth-child(1) {
+    flex: 1.5;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-group {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .th, .td {
+        min-width: 80px;
+        padding: 8px;
+    }
+    
+    .table-header, .table-row {
+        overflow-x: auto;
+    }
+}
+
 /* Responsiveness Fixes */
 @media (max-width: 576px) {
     .inv-model-item {
@@ -1193,6 +1506,7 @@
                         <div class="tab" onclick="switchTab('payment', this)">سند الصرف</div>
                         <div class="tab" onclick="switchTab('supply', this)">أمر التوريد</div>
                         <div class="tab" onclick="switchTab('preparation', this)">التجهيز</div>
+                        <div class="tab" onclick="switchTab('delivery', this)">التسليم</div>
                     </div>
                 </div>
                 
@@ -1226,7 +1540,7 @@
                         </div>
                         <div class="fab" onclick="navigateTo('new-invoice')">
                             <i class="material-icons">add</i>
-                            <span>فاتورة حجز</span>
+                            <span>إضافة</span>
                         </div>
                     </div>
                 </div>
@@ -1252,6 +1566,11 @@
                                 <i class="material-icons">chevron_left</i>
                             </div>
                         </div>
+                  
+                    </div>
+                    <div class="fab" onclick="navigateTo('cashReceipt')">
+                        <i class="material-icons">add</i>
+                        <span>إضافة</span>
                     </div>
                 </div>
                 
@@ -1275,6 +1594,10 @@
                                 </div>
                                 <i class="material-icons">chevron_left</i>
                             </div>
+                        </div>
+                        <div class="fab" onclick="navigateTo('paymentVoucher')">
+                            <i class="material-icons">add</i>
+                            <span>إضافة</span>
                         </div>
                     </div>
                 </div>
@@ -1300,6 +1623,10 @@
                                 <span class="item-status status-pending">قيد الانتظار</span>
                             </div>
                         </div>
+                        <div class="fab" onclick="navigateTo('inventorySupply')">
+                            <i class="material-icons">add</i>
+                            <span>إضافة</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -1322,11 +1649,11 @@
                                     <div class="item-secondary">بدلة رسمية - 75% مكتمل</div>
                                 </div>
                                 <i class="material-icons">chevron_left</i>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+        </div>
+        </div>
+    </div>
         </div>
         
         <!-- Inventory Screen -->
@@ -2061,13 +2388,774 @@
                         <div class="inv-step-controls">
                             <button class="inv-form-button inv-secondary" id="inv-prev-btn" onclick="invPrevStep()" disabled>السابق</button>
                             <button class="inv-form-button inv-primary" id="inv-next-btn" onclick="invNextStep()">التالي</button>
-                            <button class="inv-form-button inv-success" id="inv-save-btn" onclick="invSaveInvoice()" style="display: none;">حفظ الفاتورة</button>
+                            <button class="inv-form-button inv-success" id="inv-save-btn" onclick="invSaveInvoice()" style="display: none;">طباعة/button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
+        <!-- Cash Receipt Screen (سند القبض) -->
+        <div class="screen" id="cashReceipt">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>سند القبض</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-section">
+                            <h3>البيانات الرئيسية</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم المستند</label>
+                                    <input type="text" disabled placeholder="يظهر آلياً" />
+                                </div>
+                                <div class="form-group">
+                                    <label>تاريخ المستند</label>
+                                    <input type="date" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>الصندوق</label>
+                                    <select>
+                                        <option>الصندوق الرئيسي</option>
+                                        <option>صندوق المبيعات</option>
+                                        <option>صندوق المصروفات</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>الحساب</label>
+                                    <select>
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>العملة</label>
+                                    <select>
+                                        <option>ريال سعودي</option>
+                                        <option>دولار أمريكي</option>
+                                        <option>يورو</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>سعر التحويل</label>
+                                    <input type="number" value="1" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>المبلغ بعملة الدفع</label>
+                                    <input type="number" placeholder="أدخل المبلغ" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>المبلغ بالعملة المحلية</label>
+                                    <input type="number" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>رقم المرجع</label>
+                                    <input type="text" placeholder="أدخل الرقم المرجعي" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label>البيان</label>
+                                    <textarea placeholder="أدخل البيان الخاص بالسند"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>البيانات التفصيلية</h3>
+                            <div class="detail-table">
+                                <div class="table-header">
+                                    <div class="th">المستفيد</div>
+                                    <div class="th">العملة</div>
+                                    <div class="th">المبلغ بعملة الدفع</div>
+                                    <div class="th">المبلغ بالعملة المحلية</div>
+                                    <div class="th">البيان</div>
+                                    <div class="th">حذف</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td">
+                                        <div class="input-with-icon">
+                                            <input type="text" placeholder="اختر المستفيد" />
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </div>
+                                    <div class="td">
+                                        <select disabled>
+                                            <option>ريال سعودي</option>
+                                        </select>
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" placeholder="المبلغ" />
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" disabled />
+                                    </div>
+                                    <div class="td">
+                                        <input type="text" placeholder="البيان" />
+                                    </div>
+                                    <div class="td">
+                                        <button class="delete-button"><i class="material-icons">delete</i></button>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td" colspan="6">
+                                        <button class="add-row-button"><i class="material-icons">add</i> إضافة مستفيد</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="save-button"><i class="material-icons">print</i>طباعة</button>
+                            <button class="cancel-button">إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Voucher Screen (سند الصرف) -->
+        <div class="screen" id="paymentVoucher">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>سند الصرف</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-section">
+                            <h3>البيانات الرئيسية</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم المستند</label>
+                                    <input type="text" disabled placeholder="يظهر آلياً" />
+                                </div>
+                                <div class="form-group">
+                                    <label>تاريخ المستند</label>
+                                    <input type="date" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>الصندوق</label>
+                                    <select>
+                                        <option>الصندوق الرئيسي</option>
+                                        <option>صندوق المبيعات</option>
+                                        <option>صندوق المصروفات</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>الحساب</label>
+                                    <select>
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>العملة</label>
+                                    <select>
+                                        <option>ريال سعودي</option>
+                                        <option>دولار أمريكي</option>
+                                        <option>يورو</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>سعر التحويل</label>
+                                    <input type="number" value="1" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>المبلغ بعملة الدفع</label>
+                                    <input type="number" placeholder="أدخل المبلغ" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>المبلغ بالعملة المحلية</label>
+                                    <input type="number" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>رقم المرجع</label>
+                                    <input type="text" placeholder="أدخل الرقم المرجعي" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label>البيان</label>
+                                    <textarea placeholder="أدخل البيان الخاص بالسند"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" id="employeePayment" />
+                                        <label for="employeePayment">صرف موظفين</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" id="vatPayment" />
+                                        <label for="vatPayment">صرف ضريبة القيمة المضافة</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>البيانات التفصيلية</h3>
+                            <div class="detail-table">
+                                <div class="table-header">
+                                    <div class="th">المستفيد</div>
+                                    <div class="th">العملة</div>
+                                    <div class="th">المبلغ بعملة الدفع</div>
+                                    <div class="th">المبلغ بالعملة المحلية</div>
+                                    <div class="th">البيان</div>
+                                    <div class="th">حذف</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td">
+                                        <div class="input-with-icon">
+                                            <input type="text" placeholder="اختر المستفيد" />
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </div>
+                                    <div class="td">
+                                        <select disabled>
+                                            <option>ريال سعودي</option>
+                                        </select>
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" placeholder="المبلغ" />
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" disabled />
+                                    </div>
+                                    <div class="td">
+                                        <input type="text" placeholder="البيان" />
+                                    </div>
+                                    <div class="td">
+                                        <button class="delete-button"><i class="material-icons">delete</i></button>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td" colspan="6">
+                                        <button class="add-row-button"><i class="material-icons">add</i> إضافة مستفيد</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="save-button"><i class="material-icons">print</i>طباعة</button>
+                            <button class="cancel-button">إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Supply Order Screen (أمر التوريد المخزني) -->
+        <div class="screen" id="inventorySupply">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>أمر التوريد المخزني</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-section">
+                            <h3>البيانات الرئيسية</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم التوريد</label>
+                                    <input type="text" disabled placeholder="يظهر آلياً" />
+                                </div>
+                                <div class="form-group">
+                                    <label>تاريخ التوريد</label>
+                                    <input type="date" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>طريقة الدفع</label>
+                                    <div class="radio-group">
+                                        <div class="radio-item">
+                                            <input type="radio" id="cashPayment" name="paymentMethod" checked />
+                                            <label for="cashPayment">نقداً</label>
+                                        </div>
+                                        <div class="radio-item">
+                                            <input type="radio" id="creditPayment" name="paymentMethod" />
+                                            <label for="creditPayment">آجل</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>الصندوق</label>
+                                    <select>
+                                        <option>الصندوق الرئيسي</option>
+                                        <option>صندوق المشتريات</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row supplier-row" style="display:none;">
+                                <div class="form-group">
+                                    <label>المورد</label>
+                                    <div class="input-with-icon">
+                                        <input type="text" placeholder="اختر المورد" />
+                                        <i class="material-icons">search</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>العملة</label>
+                                    <select>
+                                        <option>ريال سعودي</option>
+                                        <option>دولار أمريكي</option>
+                                        <option>يورو</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>سعر التحويل</label>
+                                    <input type="number" value="1" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>إجمالي الضريبة</label>
+                                    <input type="number" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>التكلفة</label>
+                                    <input type="number" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>المبلغ بعملة الدفع</label>
+                                    <input type="number" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>الإجمالي بالعملة المحلية</label>
+                                    <input type="number" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم المرجع</label>
+                                    <input type="text" placeholder="أدخل الرقم المرجعي" />
+                                </div>
+                                <div class="form-group">
+                                    <label>البيان</label>
+                                    <textarea placeholder="أدخل البيان الخاص بأمر التوريد"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>البيانات التفصيلية</h3>
+                            <div class="detail-table">
+                                <div class="table-header">
+                                    <div class="th">الصنف</div>
+                                    <div class="th">الوحدة</div>
+                                    <div class="th">الكمية</div>
+                                    <div class="th">التكلفة</div>
+                                    <div class="th">الإجمالي</div>
+                                    <div class="th">البيان</div>
+                                    <div class="th">حذف</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td">
+                                        <div class="input-with-icon">
+                                            <input type="text" placeholder="اختر الصنف" />
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </div>
+                                    <div class="td">
+                                        <input type="text" disabled placeholder="متر" />
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" placeholder="الكمية" />
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" placeholder="التكلفة" />
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" disabled />
+                                    </div>
+                                    <div class="td">
+                                        <input type="text" placeholder="البيان" />
+                                    </div>
+                                    <div class="td">
+                                        <button class="delete-button"><i class="material-icons">delete</i></button>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td" colspan="7">
+                                        <button class="add-row-button"><i class="material-icons">add</i> إضافة صنف</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="save-button"><i class="material-icons">print</i>طباعة</button>
+                            <button class="cancel-button">إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Disbursement Order Screen (أمر الصرف المخزني) -->
+        <div class="screen" id="inventoryDisbursement">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>أمر الصرف المخزني</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-section">
+                            <h3>البيانات الرئيسية</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم الصرف</label>
+                                    <input type="text" disabled placeholder="يظهر آلياً" />
+                                </div>
+                                <div class="form-group">
+                                    <label>تاريخ الصرف</label>
+                                    <input type="date" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>المستلم</label>
+                                    <div class="radio-group">
+                                        <div class="radio-item">
+                                            <input type="radio" id="supplierRadio" name="recipientType" checked />
+                                            <label for="supplierRadio">مورد</label>
+                                        </div>
+                                        <div class="radio-item">
+                                            <input type="radio" id="customerRadio" name="recipientType" />
+                                            <label for="customerRadio">عميل</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>المورد/العميل</label>
+                                    <div class="input-with-icon">
+                                        <input type="text" placeholder="اختر المستلم" />
+                                        <i class="material-icons">search</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>إجمالي الضريبة</label>
+                                    <input type="number" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>التكلفة</label>
+                                    <input type="number" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>الإجمالي</label>
+                                    <input type="number" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>الإجمالي بالعملة المحلية</label>
+                                    <input type="number" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم المرجع</label>
+                                    <input type="text" placeholder="أدخل الرقم المرجعي" />
+                                </div>
+                                <div class="form-group">
+                                    <label>البيان</label>
+                                    <textarea placeholder="أدخل البيان الخاص بأمر الصرف"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>البيانات التفصيلية</h3>
+                            <div class="detail-table">
+                                <div class="table-header">
+                                    <div class="th">الصنف</div>
+                                    <div class="th">الوحدة</div>
+                                    <div class="th">الكمية</div>
+                                    <div class="th">التكلفة</div>
+                                    <div class="th">الإجمالي</div>
+                                    <div class="th">البيان</div>
+                                    <div class="th">حذف</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td">
+                                        <div class="input-with-icon">
+                                            <input type="text" placeholder="اختر الصنف" />
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </div>
+                                    <div class="td">
+                                        <input type="text" disabled placeholder="متر" />
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" placeholder="الكمية" />
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" placeholder="التكلفة" />
+                                    </div>
+                                    <div class="td">
+                                        <input type="number" disabled />
+                                    </div>
+                                    <div class="td">
+                                        <input type="text" placeholder="البيان" />
+                                    </div>
+                                    <div class="td">
+                                        <button class="delete-button"><i class="material-icons">delete</i></button>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td" colspan="7">
+                                        <button class="add-row-button"><i class="material-icons">add</i> إضافة صنف</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="save-button"><i class="material-icons">print</i>طباعة</button>
+                            <button class="cancel-button">إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Processing Screen (التجهيز) -->
+        <div class="screen" id="processing">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>تجهيز الطلبات</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-section">
+                            <h3>البيانات الرئيسية</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم المستند</label>
+                                    <input type="text" disabled placeholder="يظهر آلياً" />
+                                </div>
+                                <div class="form-group">
+                                    <label>تاريخ المستند</label>
+                                    <input type="date" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>نوع الخياطة</label>
+                                    <select>
+                                        <option>ثوب رجالي</option>
+                                        <option>بدلة رسمية</option>
+                                        <option>جلابية</option>
+                                        <option>قميص</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>المرحلة</label>
+                                    <select>
+                                        <option>القص</option>
+                                        <option>الخياطة</option>
+                                        <option>الحياكة</option>
+                                        <option>التطريز</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>فاتورة حجز</label>
+                                    <div class="input-with-icon">
+                                        <input type="text" placeholder="اختر فاتورة الحجز" />
+                                        <i class="material-icons">search</i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="action-button" id="downloadBtn">إنزال</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>البيانات التفصيلية</h3>
+                            <div class="detail-table">
+                                <div class="table-header">
+                                    <div class="th">الفاتورة</div>
+                                    <div class="th">الكمية المجهزة</div>
+                                    <div class="th">حذف</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td">فاتورة رقم #12345</div>
+                                    <div class="td">0</div>
+                                    <div class="td">
+                                        <button class="delete-button"><i class="material-icons">delete</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>تفاصيل الموظفين</h3>
+                            <div class="detail-table">
+                                <div class="table-header">
+                                    <div class="th">رقم الموظف</div>
+                                    <div class="th">اسم الموظف</div>
+                                    <div class="th">الكمية الجاهزة</div>
+                                    <div class="th">السعر</div>
+                                    <div class="th">الإجمالي</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td">
+                                        <div class="input-with-icon">
+                                            <input type="text" placeholder="اختر الموظف" />
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </div>
+                                    <div class="td"><input type="text" disabled /></div>
+                                    <div class="td"><input type="number" placeholder="الكمية" /></div>
+                                    <div class="td"><input type="number" placeholder="السعر" /></div>
+                                    <div class="td"><input type="number" disabled /></div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td" colspan="5">
+                                        <button class="add-row-button"><i class="material-icons">add</i> إضافة موظف</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="save-button"><i class="material-icons">print</i>طباعة</button>
+                            <button class="cancel-button">إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delivery Screen (التسليم) -->
+        <div class="screen" id="delivery">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>تسليم الطلبات</h2>
+                        <button class="add-button">إضافة</button>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-section">
+                            <h3>البيانات الرئيسية</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم المستند</label>
+                                    <input type="text" disabled placeholder="يظهر آلياً" />
+                                </div>
+                                <div class="form-group">
+                                    <label>تاريخ المستند</label>
+                                    <input type="date" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم الجوال</label>
+                                    <input type="text" placeholder="أدخل رقم الجوال" />
+                                </div>
+                                <div class="form-group">
+                                    <button class="action-button">بحث</button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم الفاتورة</label>
+                                    <div class="input-with-icon">
+                                        <input type="text" placeholder="اختر رقم الفاتورة" />
+                                        <i class="material-icons">search</i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>رقم العميل</label>
+                                    <div class="input-with-icon">
+                                        <input type="text" placeholder="اختر رقم العميل" />
+                                        <i class="material-icons">search</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <button class="action-button" id="downloadBtn">إنزال</button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>المبلغ الإجمالي</label>
+                                    <input type="number" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>المبلغ المدفوع</label>
+                                    <input type="number" disabled />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>المبلغ المتبقي</label>
+                                    <input type="number" disabled />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>البيانات التفصيلية</h3>
+                            <div class="detail-table">
+                                <div class="table-header">
+                                    <div class="th">الفاتورة</div>
+                                    <div class="th">اسم الصنف</div>
+                                    <div class="th">الكمية</div>
+                                    <div class="th">الكمية المجهزة</div>
+                                    <div class="th">الكمية المستلمة</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="td">فاتورة رقم #12345</div>
+                                    <div class="td">ثوب رجالي</div>
+                                    <div class="td">2</div>
+                                    <div class="td">2</div>
+                                    <div class="td"><input type="number" value="2" /></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="save-button"><i class="material-icons">print</i>طباعة</button>
+                            <button class="cancel-button">إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Measurements Screen -->
         <!-- <div class="screen" id="measurements">
             <div class="content">
